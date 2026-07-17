@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/provider/theme-provider";
+import { ClerkProvider} from '@clerk/nextjs'
+import { QueryProvider } from "@/components/provider/query-provider";
 
 const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
@@ -32,6 +34,8 @@ export default function RootLayout({
       className={cn("h-full", "antialiased", geistSans.variable, geistMono.variable, "font-mono", jetbrainsMono.variable)}
     >
       <body className="min-h-full flex flex-col">
+        <ClerkProvider>
+        <QueryProvider>
         <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -40,6 +44,8 @@ export default function RootLayout({
           >
         {children}
         </ThemeProvider>
+        </QueryProvider>
+        </ClerkProvider>
         </body>
     </html>
   );
